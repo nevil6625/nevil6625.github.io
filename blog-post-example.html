@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OWASP Top 10: SQL Injection Deep Dive - Nevil Patel</title>
+    <meta name="description" content="A comprehensive guide to understanding and preventing SQL injection attacks">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/index-BO3jftJ7.css">
+</head>
+<body class="bg-cyber-dark text-slate-100 font-inter">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="text-xl font-bold gradient-text hover:scale-105 transition-transform">
+                    ← Back to Portfolio
+                </a>
+                <div class="text-sm text-slate-400">
+                    Blog Post
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Blog Content -->
+    <main class="pt-20 px-4 sm:px-6 lg:px-8 min-h-screen">
+        <div class="max-w-4xl mx-auto">
+            <article class="py-12">
+                <!-- Header -->
+                <header class="mb-12 text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold gradient-text mb-6">
+                        OWASP Top 10: SQL Injection Deep Dive
+                    </h1>
+                    <div class="text-slate-400 mb-8">
+                        <time class="text-cyber-green">March 15, 2024</time> 
+                        <span class="mx-2">•</span> 
+                        <span>By Nevil Patel</span>
+                        <span class="mx-2">•</span>
+                        <span>8 min read</span>
+                    </div>
+                    <div class="w-24 h-1 bg-gradient-to-r from-cyber-green to-cyber-accent mx-auto"></div>
+                </header>
+                
+                <!-- Content -->
+                <div class="space-y-8">
+                    <div class="glass-effect p-8 rounded-xl">
+                        <h2 class="text-2xl font-bold text-cyber-green mb-4">Introduction</h2>
+                        <p class="text-slate-300 text-lg leading-relaxed">
+                            SQL injection remains one of the most critical web application vulnerabilities, 
+                            consistently ranking high on the OWASP Top 10 list. In this comprehensive guide, 
+                            we'll explore the mechanics of SQL injection attacks, their impact, and most 
+                            importantly, how to prevent them.
+                        </p>
+                    </div>
+
+                    <div class="bg-cyber-slate/30 p-8 rounded-xl">
+                        <h2 class="text-2xl font-bold text-cyber-accent mb-4">What is SQL Injection?</h2>
+                        <p class="text-slate-300 mb-4">
+                            SQL injection is a code injection technique that exploits vulnerabilities in 
+                            web applications' database queries. Attackers insert malicious SQL code into 
+                            application queries, potentially gaining unauthorized access to sensitive data.
+                        </p>
+                        
+                        <div class="bg-cyber-dark p-4 rounded-lg border border-cyber-green/20">
+                            <h3 class="text-cyber-green font-semibold mb-2">Example Vulnerable Code:</h3>
+                            <code class="text-slate-300 font-mono text-sm">
+                                query = "SELECT * FROM users WHERE username = '" + user_input + "'"
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="glass-effect p-8 rounded-xl">
+                        <h2 class="text-2xl font-bold text-cyber-green mb-4">Types of SQL Injection</h2>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-cyber-accent pl-4">
+                                <h3 class="font-semibold text-cyber-accent">Union-based SQLi</h3>
+                                <p class="text-slate-300">Uses UNION operator to combine results from multiple queries</p>
+                            </div>
+                            <div class="border-l-4 border-cyber-green pl-4">
+                                <h3 class="font-semibold text-cyber-green">Boolean-based Blind SQLi</h3>
+                                <p class="text-slate-300">Relies on TRUE/FALSE responses to extract information</p>
+                            </div>
+                            <div class="border-l-4 border-yellow-500 pl-4">
+                                <h3 class="font-semibold text-yellow-500">Time-based Blind SQLi</h3>
+                                <p class="text-slate-300">Uses database delays to infer information</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-red-900/20 border border-red-500/30 p-8 rounded-xl">
+                        <h2 class="text-2xl font-bold text-red-400 mb-4">Impact & Risks</h2>
+                        <ul class="space-y-2 text-slate-300">
+                            <li class="flex items-start">
+                                <span class="text-red-400 mr-2">•</span>
+                                <span>Data breach and unauthorized access to sensitive information</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-400 mr-2">•</span>
+                                <span>Database manipulation and data integrity compromise</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-400 mr-2">•</span>
+                                <span>Authentication bypass and privilege escalation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-400 mr-2">•</span>
+                                <span>Complete system compromise in severe cases</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-effect p-8 rounded-xl">
+                        <h2 class="text-2xl font-bold text-cyber-green mb-4">Prevention Techniques</h2>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-cyber-dark p-6 rounded-lg">
+                                <h3 class="font-semibold text-cyber-accent mb-3">1. Parameterized Queries</h3>
+                                <p class="text-slate-300 text-sm mb-3">Use prepared statements with parameterized queries</p>
+                                <div class="bg-cyber-slate/50 p-3 rounded border border-cyber-green/20">
+                                    <code class="text-cyber-green text-xs">
+                                        PreparedStatement ps = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
+                                    </code>
+                                </div>
+                            </div>
+                            <div class="bg-cyber-dark p-6 rounded-lg">
+                                <h3 class="font-semibold text-cyber-accent mb-3">2. Input Validation</h3>
+                                <p class="text-slate-300 text-sm mb-3">Validate and sanitize all user inputs</p>
+                                <div class="bg-cyber-slate/50 p-3 rounded border border-cyber-green/20">
+                                    <code class="text-cyber-green text-xs">
+                                        if (input.matches("[a-zA-Z0-9]+")) { /* Safe to use */ }
+                                    </code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-cyber-slate/30 p-8 rounded-xl">
+                        <h2 class="text-2xl font-bold text-cyber-accent mb-4">Testing for SQL Injection</h2>
+                        <p class="text-slate-300 mb-4">
+                            As cybersecurity professionals, we need to know how to test for these vulnerabilities:
+                        </p>
+                        <ol class="list-decimal list-inside space-y-2 text-slate-300">
+                            <li>Manual testing with common SQL injection payloads</li>
+                            <li>Automated scanning with tools like SQLMap</li>
+                            <li>Code review for vulnerable query patterns</li>
+                            <li>Penetration testing as part of security assessments</li>
+                        </ol>
+                    </div>
+
+                    <div class="glass-effect p-8 rounded-xl">
+                        <h2 class="text-2xl font-bold text-cyber-green mb-4">Conclusion</h2>
+                        <p class="text-slate-300 text-lg leading-relaxed">
+                            SQL injection vulnerabilities remain a critical threat to web applications. 
+                            By understanding how these attacks work and implementing proper prevention 
+                            techniques, we can significantly improve application security. Remember: 
+                            defense in depth is key - combine multiple security measures for the best protection.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="mt-16 pt-8 border-t border-cyber-green/20">
+                    <div class="flex justify-between items-center">
+                        <a href="index.html" class="text-cyber-accent hover:text-cyber-green transition-colors flex items-center">
+                            ← Back to Portfolio
+                        </a>
+                        <div class="text-slate-400 text-sm">
+                            Share this post on social media
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-cyber-slate py-8 px-4 sm:px-6 lg:px-8 mt-16">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-slate-400">
+                © 2024 Nevil Patel. Built with passion for cybersecurity.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,75 @@
+QUICK EDIT GUIDE - Portfolio Website
+====================================
+
+🎯 FASTEST WAY TO UPDATE YOUR PORTFOLIO:
+
+1. EDIT THE CONFIG FILE
+   File: config.js
+   - Change personal info (name, email, etc.)
+   - Update social links
+   - Add/remove projects
+   - Modify skills and certifications
+
+2. EDIT HTML DIRECTLY (Advanced)
+   File: index.html
+   - Search for specific text you want to change
+   - Replace with your new content
+
+🔍 WHAT TO SEARCH FOR IN index.html:
+
+Personal Info:
+- Search: "Nevil Patel" → Replace with your name
+- Search: "nevilpatel6625@gmail.com" → Replace with your email  
+- Search: "Canada" → Replace with your location
+
+Social Links:
+- Search: "github.com/nevil6625" → Replace with your GitHub
+- Search: "linkedin.com/in/nevil-patel" → Replace with your LinkedIn
+- Search: "medium.com/@nevilpatel6625" → Replace with your Medium
+
+Projects:
+- Search: "Ensemble Defense System" → Replace with your project
+- Search: "Home Lab" → Replace with your project
+
+Skills:
+- Search: "Penetration Testing" → Replace category name
+- Search: "Metasploit Framework" → Replace individual skills
+
+Certifications:
+- Search: "Security+" → Replace certification name
+- Search: "CompTIA" → Replace organization
+
+📝 ADDING NEW CONTENT:
+
+New Project:
+1. Find existing project section in HTML
+2. Copy the entire <div class="glass-effect..."> block
+3. Paste it and modify the content
+
+New Skill Category:
+1. Find skills section
+2. Copy a skill category block
+3. Modify the title and skill list
+
+New Certification:
+1. Find certification section  
+2. Copy a certification block
+3. Update name, organization, status
+
+🚀 TESTING YOUR CHANGES:
+
+1. Save the file
+2. Open index.html in web browser
+3. Check everything looks correct
+4. Upload to GitHub when ready
+
+⚠️ IMPORTANT:
+- Always backup files before editing
+- Don't delete HTML tags (< >)
+- Keep the structure intact
+- Test locally before uploading
+
+🆘 IF SOMETHING BREAKS:
+- Restore from your backup
+- Or download fresh copy from GitHub
+- Compare with working version to find the issue
